@@ -5,6 +5,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.deity.raillery.R;
 import com.deity.raillery.data.Params;
 import com.deity.raillery.model.entity.DynamicEntity;
@@ -31,7 +32,7 @@ public class HomeAdapter extends CommonBaseAdapter<DynamicEntity> {
     @Override
     protected void convert(ViewHolder holder, DynamicEntity data) {
         holder.setText(R.id.image_description,data.getDescription());
-        Glide.with(context).load(Params.NetWork.WEBSITE_BASE_URL+data.getFileUrl()).into((ImageView)holder.getView(R.id.image_gif));
+        Glide.with(context).load(Params.NetWork.WEBSITE_BASE_URL+data.getFileUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into((ImageView)holder.getView(R.id.image_gif));
     }
 
     @Override
