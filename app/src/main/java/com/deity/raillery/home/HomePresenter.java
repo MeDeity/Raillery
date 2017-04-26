@@ -38,6 +38,7 @@ public class HomePresenter extends IHomeComponent.Presenter<DynamicRepository> {
 
         @Override
         public void onNext(ResponseEntity dynamicEntity) {
+            mView.showDynamic(dynamicEntity);
             System.out.println(dynamicEntity.getMessage());
         }
 
