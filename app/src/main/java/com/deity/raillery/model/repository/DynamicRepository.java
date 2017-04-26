@@ -18,6 +18,6 @@ public class DynamicRepository {
      * @return 返回分页数据
      */
     public Observable<DynamicEntity> getDynamicList(int page){
-        return NetWorkEngine.getInstance().getApiService().getDynamicList(page);
+        return NetWorkEngine.getInstance().getApiService().getDynamicList();
     }
 }

@@ -7,7 +7,7 @@ package com.deity.raillery.data;
 
 public class Params {
     public static class NetWork{
-        public final static String WEBSITE_BASE_URL = "http://163.44.148.233:8080/raillery";
+        public final static String WEBSITE_BASE_URL = "http://163.44.148.233:8080/raillery/";
 
     }
 }

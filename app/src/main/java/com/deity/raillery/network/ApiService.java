@@ -16,4 +16,7 @@ public interface ApiService {
 
     @GET("dynamic/query/{page}")
     Observable<DynamicEntity> getDynamicList(@Path("page") int page);
+
+    @GET("dynamic/queryAll")
+    Observable<DynamicEntity> getDynamicList();
 }

@@ -3,8 +3,10 @@ package com.deity.raillery.home;
 import com.deity.raillery.model.entity.DynamicEntity;
 import com.deity.raillery.model.repository.DynamicRepository;
 
+import io.reactivex.Scheduler;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Deity on 2017/4/25.
@@ -18,7 +20,7 @@ public class HomePresenter extends IHomeComponent.Presenter<DynamicRepository> {
      */
     @Override
     void loadDynamicByPage(int page) {
-        repository.getDynamicList(page).subscribe(new Consumer<DynamicEntity>() {
+        repository.getDynamicList(page).subscribeOn(Schedulers.io()).subscribe(new Consumer<DynamicEntity>() {
             @Override
             public void accept(@NonNull DynamicEntity dynamicEntity) throws Exception {
                 mView.showDynamic(dynamicEntity);
