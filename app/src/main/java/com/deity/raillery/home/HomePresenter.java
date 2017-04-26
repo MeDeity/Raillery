@@ -1,11 +1,10 @@
 package com.deity.raillery.home;
 
-import com.deity.raillery.model.entity.DynamicEntity;
+import com.deity.raillery.model.entity.ResponseEntity;
 import com.deity.raillery.model.repository.DynamicRepository;
 
-import io.reactivex.Scheduler;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -13,6 +12,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class HomePresenter extends IHomeComponent.Presenter<DynamicRepository> {
+
     /**
      * 分页加载动态消息数据
      *
@@ -20,16 +20,35 @@ public class HomePresenter extends IHomeComponent.Presenter<DynamicRepository> {
      */
     @Override
     void loadDynamicByPage(int page) {
-        repository.getDynamicList(page).subscribeOn(Schedulers.io()).subscribe(new Consumer<DynamicEntity>() {
-            @Override
-            public void accept(@NonNull DynamicEntity dynamicEntity) throws Exception {
-                mView.showDynamic(dynamicEntity);
-            }
-        });
+        repository.getDynamicList(page).subscribeOn(Schedulers.io()).subscribe(observer);
     }
 
     @Override
     public void subscribe() {
         loadDynamicByPage(0);
     }
+
+    Observer<ResponseEntity> observer = new Observer<ResponseEntity>() {
+        private Disposable disposable;
+
+        @Override
+        public void onSubscribe(Disposable d) {
+            disposable = d;
+        }
+
+        @Override
+        public void onNext(ResponseEntity dynamicEntity) {
+            System.out.println(dynamicEntity.getMessage());
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+
+        @Override
+        public void onComplete() {
+
+        }
+    };
 }

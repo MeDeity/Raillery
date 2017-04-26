@@ -1,6 +1,6 @@
 package com.deity.raillery.model.repository;
 
-import com.deity.raillery.model.entity.DynamicEntity;
+import com.deity.raillery.model.entity.ResponseEntity;
 import com.deity.raillery.network.NetWorkEngine;
 
 import io.reactivex.Observable;
@@ -17,7 +17,7 @@ public class DynamicRepository {
      * @param page 当前第几页
      * @return 返回分页数据
      */
-    public Observable<DynamicEntity> getDynamicList(int page){
+    public Observable<ResponseEntity> getDynamicList(int page){
         return NetWorkEngine.getInstance().getApiService().getDynamicList();
     }
 }

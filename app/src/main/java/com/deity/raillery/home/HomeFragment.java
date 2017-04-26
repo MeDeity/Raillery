@@ -3,7 +3,7 @@ package com.deity.raillery.home;
 import android.os.Bundle;
 
 import com.deity.raillery.base.BaseRxFragment;
-import com.deity.raillery.model.entity.DynamicEntity;
+import com.deity.raillery.model.entity.ResponseEntity;
 
 /**
  * Created by Deity on 2017/4/25.
@@ -37,7 +37,7 @@ public class HomeFragment extends BaseRxFragment<HomePresenter> implements IHome
     }
 
     @Override
-    public void showDynamic(DynamicEntity entity) {
+    public void showDynamic(ResponseEntity entity) {
 
     }
 }

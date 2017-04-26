@@ -2,7 +2,7 @@ package com.deity.raillery.home;
 
 import com.deity.raillery.base.BaseRxPresenter;
 import com.deity.raillery.base.BaseView;
-import com.deity.raillery.model.entity.DynamicEntity;
+import com.deity.raillery.model.entity.ResponseEntity;
 
 /**
  * 接口定义
@@ -12,7 +12,7 @@ import com.deity.raillery.model.entity.DynamicEntity;
 public interface IHomeComponent {
 
     public interface View extends BaseView{
-        void showDynamic(DynamicEntity entity);
+        void showDynamic(ResponseEntity entity);
     }
 
     public abstract class Presenter<R> extends BaseRxPresenter<R,View>{

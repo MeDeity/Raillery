@@ -1,7 +1,7 @@
 package com.deity.raillery.network;
 
 
-import com.deity.raillery.model.entity.DynamicEntity;
+import com.deity.raillery.model.entity.ResponseEntity;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -15,8 +15,8 @@ import retrofit2.http.Path;
 public interface ApiService {
 
     @GET("dynamic/query/{page}")
-    Observable<DynamicEntity> getDynamicList(@Path("page") int page);
+    Observable<ResponseEntity> getDynamicList(@Path("page") int page);
 
     @GET("dynamic/queryAll")
-    Observable<DynamicEntity> getDynamicList();
+    Observable<ResponseEntity> getDynamicList();
 }
