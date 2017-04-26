@@ -4,6 +4,7 @@ import com.deity.raillery.model.entity.ResponseEntity;
 import com.deity.raillery.model.repository.DynamicRepository;
 
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -20,7 +21,7 @@ public class HomePresenter extends IHomeComponent.Presenter<DynamicRepository> {
      */
     @Override
     void loadDynamicByPage(int page) {
-        repository.getDynamicList(page).subscribeOn(Schedulers.io()).subscribe(observer);
+        repository.getDynamicList(page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
     }
 
     @Override

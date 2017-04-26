@@ -23,7 +23,6 @@ public abstract class BaseRxFragment<P extends BaseRxPresenter> extends Fragment
     public BaseRxFragment(){
         mPresenter = ClazzUtils.getGenericInstance(this);
         mPresenter.setView(this);
-        mPresenter.subscribe();
     }
 
     private Unbinder unbinder;
