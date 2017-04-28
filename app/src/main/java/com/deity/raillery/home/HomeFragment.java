@@ -63,7 +63,14 @@ public class HomeFragment extends BaseRxFragment<HomePresenter> implements IHome
 
         //初始化 开始加载更多的loading View
         View reloadLayout = LayoutInflater.from(getActivity()).inflate(R.layout.load_failed_layout, (ViewGroup) home_recyclerView.getParent(), false);
-        homeAdapter.setLoadingView(reloadLayout);
+        homeAdapter.setLoadingView(R.layout.load_loading_layout);
+
+//        homeAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+//            @Override
+//            public void onLoadMore(boolean isReload) {
+//                mPresenter.loadDynamicByPage(0);
+//            }
+//        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
