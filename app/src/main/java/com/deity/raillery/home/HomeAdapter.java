@@ -2,6 +2,8 @@ package com.deity.raillery.home;
 
 
 import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -30,7 +32,7 @@ public class HomeAdapter extends CommonBaseAdapter<DynamicEntity> {
     @Override
     protected void convert(ViewHolder holder, DynamicEntity data) {
         holder.setText(R.id.image_description,data.getDescription());
-        ImageView imageView = holder.getView(R.id.image_gif);
+        ImageView imageView = (ImageView)holder.getView(R.id.image_gif);
         //这部分显示高度不同图片,从服务器传递
 //        String width = dataBean.getWidth();
 //        String height = dataBean.getHeight();
@@ -38,7 +40,11 @@ public class HomeAdapter extends CommonBaseAdapter<DynamicEntity> {
 //        lp.width = mWidth;
 //        lp.height = (mWidth * Integer.parseInt(height) / Integer.parseInt(width));
 //        imageView.setLayoutParams(lp);
-        Glide.with(context).load(Params.NetWork.WEBSITE_BASE_URL+data.getFileUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into((ImageView)holder.getView(R.id.image_gif));
+        if (!data.getFileUrl().equals(imageView.getTag())) {
+            Log.i(HomeAdapter.class.getSimpleName(),Params.NetWork.WEBSITE_BASE_URL + data.getFileUrl());
+            Glide.with(context).load(Params.NetWork.WEBSITE_BASE_URL + data.getFileUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView);
+            imageView.setTag(data.getFileUrl());
+        }
 
     }
 
