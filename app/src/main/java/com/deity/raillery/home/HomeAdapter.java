@@ -40,10 +40,10 @@ public class HomeAdapter extends CommonBaseAdapter<DynamicEntity> {
 //        lp.width = mWidth;
 //        lp.height = (mWidth * Integer.parseInt(height) / Integer.parseInt(width));
 //        imageView.setLayoutParams(lp);
-        if (!data.getFileUrl().equals(imageView.getTag())) {
+        if (!data.getFileUrl().equals(imageView.getTag(R.id.image_key))) {
             Log.i(HomeAdapter.class.getSimpleName(),Params.NetWork.WEBSITE_BASE_URL + data.getFileUrl());
             Glide.with(context).load(Params.NetWork.WEBSITE_BASE_URL + data.getFileUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView);
-            imageView.setTag(data.getFileUrl());
+            imageView.setTag(R.id.image_key,data.getFileUrl());
         }
 
     }
