@@ -45,12 +45,12 @@ public class HomePresenter extends IHomeComponent.Presenter<DynamicRepository> {
 
         @Override
         public void onError(Throwable e) {
-
+            mView.showLoadFail();
         }
 
         @Override
         public void onComplete() {
-
+            mView.showLoadEnd();
         }
     };
 }

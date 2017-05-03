@@ -13,6 +13,8 @@ public interface IHomeComponent {
 
     public interface View extends BaseView{
         void showDynamic(ResponseEntity entity);
+        void showLoadFail();
+        void showLoadEnd();
     }
 
     public abstract class Presenter<R> extends BaseRxPresenter<R,View>{
