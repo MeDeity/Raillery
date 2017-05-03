@@ -1,5 +1,7 @@
 package com.deity.raillery.home;
 
+import android.util.Log;
+
 import com.deity.raillery.model.entity.ResponseEntity;
 import com.deity.raillery.model.repository.DynamicRepository;
 
@@ -26,6 +28,7 @@ public class HomePresenter extends IHomeComponent.Presenter<DynamicRepository> {
 
     @Override
     public void subscribe() {
+        Log.i("subscribe","loadDynamicByPage(0)");
         loadDynamicByPage(0);
     }
 
@@ -39,7 +42,11 @@ public class HomePresenter extends IHomeComponent.Presenter<DynamicRepository> {
 
         @Override
         public void onNext(ResponseEntity dynamicEntity) {
-            mView.showDynamic(dynamicEntity);
+            if (null==dynamicEntity.getData()){
+                mView.showLoadEnd();
+            }else {
+                mView.showDynamic(dynamicEntity);
+            }
             System.out.println(dynamicEntity.getMessage());
         }
 
@@ -50,7 +57,7 @@ public class HomePresenter extends IHomeComponent.Presenter<DynamicRepository> {
 
         @Override
         public void onComplete() {
-            mView.showLoadEnd();
+
         }
     };
 }

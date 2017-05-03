@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,6 @@ public class HomeFragment extends BaseRxFragment<HomePresenter> implements IHome
     public SwipeRefreshLayout mSwipeRefreshLayout;
     private HomeAdapter homeAdapter;
     /**重新加载*/
-    private View reloadLayout;
     private int currentPage=0;
 
     public static HomeFragment newInstance(Bundle args) {
@@ -55,24 +55,12 @@ public class HomeFragment extends BaseRxFragment<HomePresenter> implements IHome
         homeAdapter.setEmptyView(emptyView);
 
         //初始化 开始加载更多的loading View
-        reloadLayout = LayoutInflater.from(getActivity()).inflate(R.layout.reload_layout, (ViewGroup) home_recyclerView.getParent(), false);
-        final View reloadBtn = reloadLayout.findViewById(R.id.load_error_tip);
-        final View reloadTip = reloadLayout.findViewById(R.id.reload_tip);
-        reloadBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                reloadBtn.setVisibility(View.GONE);
-                reloadTip.setVisibility(View.VISIBLE);
-                mPresenter.loadDynamicByPage(currentPage);
-            }
-        });
-
-        //初始化 开始加载更多的loading View
         homeAdapter.setLoadingView(R.layout.load_loading_layout);
 
         homeAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(boolean isReload) {
+                Log.i("onLoadMore","loadDynamicByPage:"+currentPage);
                 mPresenter.loadDynamicByPage(currentPage);
             }
         });
@@ -110,6 +98,21 @@ public class HomeFragment extends BaseRxFragment<HomePresenter> implements IHome
     @Override
     public void showLoadFail() {
         mSwipeRefreshLayout.setRefreshing(false);
+        //初始化 开始加载更多的loading View
+        View reloadLayout = LayoutInflater.from(getActivity()).inflate(R.layout.reload_layout, (ViewGroup) home_recyclerView.getParent(), false);
+        final View reloadBtn = reloadLayout.findViewById(R.id.load_error_tip);
+        final View reloadTip = reloadLayout.findViewById(R.id.reload_tip);
+        reloadBtn.setVisibility(View.VISIBLE);
+        reloadTip.setVisibility(View.GONE);
+        reloadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reloadBtn.setVisibility(View.GONE);
+                reloadTip.setVisibility(View.VISIBLE);
+                Log.i("showLoadFail","loadDynamicByPage:"+currentPage);
+                mPresenter.loadDynamicByPage(currentPage);
+            }
+        });
         homeAdapter.setReloadView(reloadLayout);
     }
 
@@ -124,6 +127,7 @@ public class HomeFragment extends BaseRxFragment<HomePresenter> implements IHome
      */
     @Override
     public void onRefresh() {
+        Log.i("onRefresh","loadDynamicByPage(0)");
         mPresenter.loadDynamicByPage(0);
     }
 }
