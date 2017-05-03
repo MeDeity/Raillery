@@ -14,7 +14,7 @@ import retrofit2.http.Path;
 
 public interface ApiService {
 
-    @GET("dynamic/query/{page}")
+    @GET("dynamic/queryPaging/{page}")
     Observable<ResponseEntity> getDynamicList(@Path("page") int page);
 
     @GET("dynamic/queryAll")
