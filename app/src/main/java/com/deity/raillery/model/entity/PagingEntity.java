@@ -6,11 +6,11 @@ package com.deity.raillery.model.entity;
 
 public class PagingEntity {
     private DynamicEntity[] content;
-    private boolean isLast;
+    private boolean last;
     private int totalPages;
     private int totalElements;
     private String sort;
-    private boolean isFirst;
+    private boolean first;
     private int numberOfElements;
     private int size;
     private int number;
@@ -21,14 +21,6 @@ public class PagingEntity {
 
     public void setContent(DynamicEntity[] content) {
         this.content = content;
-    }
-
-    public boolean isLast() {
-        return isLast;
-    }
-
-    public void setLast(boolean last) {
-        isLast = last;
     }
 
     public int getTotalPages() {
@@ -55,12 +47,20 @@ public class PagingEntity {
         this.sort = sort;
     }
 
+    public boolean isLast() {
+        return last;
+    }
+
+    public void setLast(boolean last) {
+        this.last = last;
+    }
+
     public boolean isFirst() {
-        return isFirst;
+        return first;
     }
 
     public void setFirst(boolean first) {
-        isFirst = first;
+        this.first = first;
     }
 
     public int getNumberOfElements() {

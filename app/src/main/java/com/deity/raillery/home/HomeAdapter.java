@@ -39,21 +39,6 @@ public class HomeAdapter extends CommonBaseAdapter<DynamicEntity> {
 
         final ImageView imageView = (ImageView)holder.getView(R.id.image_gif);
         final DynamicEntity entity = data;
-
-//        //这部分显示高度不同图片,从服务器传递
-//        float width = data.getWidth();
-//        float height = data.getHeight();
-//        ViewGroup.LayoutParams lp = imageView.getLayoutParams();
-////        Log.i("width>>>",""+lp.width);
-////        lp.height = (int)(lp.width * height / width);
-//        lp.width = (int)width;
-//        lp.height = (int)height;
-//        imageView.setLayoutParams(lp);
-//        if (!data.getFileUrl().equals(imageView.getTag(R.id.image_key))) {
-//            Log.i(HomeAdapter.class.getSimpleName(),Params.NetWork.WEBSITE_BASE_URL + data.getFileUrl());
-//            Glide.with(context).load(Params.NetWork.WEBSITE_BASE_URL + data.getFileUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView);
-//            imageView.setTag(R.id.image_key,data.getFileUrl());
-//        }
         imageView.post(new Runnable() {
             @Override
             public void run() {
