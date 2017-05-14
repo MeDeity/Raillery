@@ -11,7 +11,7 @@ public class ResponseEntity {
     /**文件路径*/
     private int status;
 
-    private DynamicEntity[] data;
+    private PagingEntity data;
 
     public String getMessage() {
         return message;
@@ -29,11 +29,11 @@ public class ResponseEntity {
         this.status = status;
     }
 
-    public DynamicEntity[] getData() {
+    public PagingEntity getData() {
         return data;
     }
 
-    public void setData(DynamicEntity[] data) {
+    public void setData(PagingEntity data) {
         this.data = data;
     }
 }

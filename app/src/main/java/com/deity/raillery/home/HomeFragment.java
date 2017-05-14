@@ -92,7 +92,7 @@ public class HomeFragment extends BaseRxFragment<HomePresenter> implements IHome
         //成功加载的情况下，更新当前页面
         currentPage += 1;
         mSwipeRefreshLayout.setRefreshing(false);
-        homeAdapter.setData(Arrays.asList(entity.getData()));
+        homeAdapter.setData(Arrays.asList(entity.getData().getContent()));
     }
 
     @Override
