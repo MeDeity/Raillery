@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.deity.raillery.R;
 import com.deity.raillery.base.BaseRxFragment;
+import com.deity.raillery.base.SpaceItemDecoration;
 import com.deity.raillery.model.entity.ResponseEntity;
 import com.deity.raillery.utils.I18NData;
 import com.othershe.baseadapter.interfaces.OnLoadMoreListener;
@@ -67,6 +68,10 @@ public class HomeFragment extends BaseRxFragment<HomePresenter> implements IHome
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        //间距设置
+        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.recycle_space);
+        home_recyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+
         home_recyclerView.setLayoutManager(layoutManager);
         home_recyclerView.setAdapter(homeAdapter);
         mSwipeRefreshLayout.setColorSchemeColors(I18NData.getColor(R.color.colorAccent), I18NData.getColor(R.color.colorPrimary),I18NData.getColor(R.color.colorPrimaryDark));
