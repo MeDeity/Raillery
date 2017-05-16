@@ -1,5 +1,6 @@
 package com.deity.raillery.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,8 +14,12 @@ import android.view.ViewGroup;
 import com.deity.raillery.R;
 import com.deity.raillery.base.BaseRxFragment;
 import com.deity.raillery.base.SpaceItemDecoration;
+import com.deity.raillery.data.Params;
+import com.deity.raillery.model.entity.DynamicEntity;
 import com.deity.raillery.model.entity.ResponseEntity;
 import com.deity.raillery.utils.I18NData;
+import com.othershe.baseadapter.ViewHolder;
+import com.othershe.baseadapter.interfaces.OnItemClickListener;
 import com.othershe.baseadapter.interfaces.OnLoadMoreListener;
 
 import java.util.Arrays;
@@ -63,6 +68,14 @@ public class HomeFragment extends BaseRxFragment<HomePresenter> implements IHome
             public void onLoadMore(boolean isReload) {
                 Log.i("onLoadMore","loadDynamicByPage:"+currentPage);
                 mPresenter.loadDynamicByPage(currentPage);
+            }
+        });
+        homeAdapter.setOnItemClickListener(new OnItemClickListener<DynamicEntity>() {
+            @Override
+            public void onItemClick(ViewHolder viewHolder, DynamicEntity data, int position) {
+//                Intent imageIntent = new Intent(getActivity(), ImageActivity.class);
+//                imageIntent.putExtra(Params.PHOTO_URI,data.getFileUrl());
+//                startActivity(imageIntent);
             }
         });
 
