@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.deity.raillery.home.HomeFragment;
+import com.deity.raillery.menu.holder.DrawerFragment;
 
 public class HomeActivity extends AppCompatActivity{
 
@@ -37,6 +38,11 @@ public class HomeActivity extends AppCompatActivity{
         HomeFragment fragment = HomeFragment.newInstance();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.home_view,fragment).commit();
+
+        DrawerFragment drawerFragment = new DrawerFragment();
+        FragmentTransaction menuTransaction = getSupportFragmentManager().beginTransaction();
+        menuTransaction.replace(R.id.lv_left_menu,drawerFragment).commit();
+
     }
 
     @Override

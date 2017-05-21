@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="111.0dip"
+    android:background="@color/background_drawer_primary_light"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/drawer_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="11dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <ImageView
+            android:id="@+id/drawer_user_avatar"
+            android:layout_width="33.0dip"
+            android:layout_height="33.0dip"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="13.0dip"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/drawer_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/drawer_user_avatar"
+            android:maxWidth="96.0dip"
+            android:text="爆笑君"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打赏"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/drawer_user_name"/>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
