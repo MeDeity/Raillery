@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.deity.raillery.R;
+import com.deity.raillery.data.RailleryApplication;
 
 import butterknife.ButterKnife;
 
@@ -22,9 +23,27 @@ public class DrawerMenuHomeViewHolder extends BaseViewHolder {
         ButterKnife.bind(this,itemView);
     }
 
-    @Override
-    public void bindData(int position, int viewType) {
+    public void itemViewHighLight(int postion){
+        if (postion == drawerAdapter.getmSelction()){
+            itemView.setBackgroundColor(RailleryApplication.instance.getResources().getColor(R.color.drawer_bg_highlight_light));
+        }else {
+            itemView.setBackgroundColor(RailleryApplication.instance.getResources().getColor(R.color.drawer_bg_normal_light));
+        }
+    }
 
+    @Override
+    public void bindData(final int position, int viewType) {
+        itemViewHighLight(position);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerAdapter.setSelection(position);
+                DrawerSelectListener drawerSelectListener = drawerAdapter.getmDrawerSelectistener();
+                if (null!=drawerSelectListener){
+                    drawerSelectListener.onDrawerHomeItemSelect(position);
+                }
+            }
+        });
     }
 
     public static DrawerMenuHomeViewHolder instance(ViewGroup parent,DrawerAdapter drawerAdapter){

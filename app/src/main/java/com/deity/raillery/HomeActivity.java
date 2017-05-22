@@ -13,14 +13,26 @@ import android.view.MenuItem;
 
 import com.deity.raillery.home.HomeFragment;
 import com.deity.raillery.menu.holder.DrawerFragment;
+import com.deity.raillery.menu.holder.DrawerSelectListener;
+import com.deity.raillery.model.entity.DynamicType;
+import com.deity.raillery.model.entity.MenuEntity;
 
-public class HomeActivity extends AppCompatActivity{
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class HomeActivity extends AppCompatActivity implements DrawerSelectListener{
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         toolbar.setTitle("Toolbar");//设置Toolbar标题
         toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
         setSupportActionBar(toolbar);
@@ -28,7 +40,7 @@ public class HomeActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -75,6 +87,37 @@ public class HomeActivity extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void closeDrawer() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+    }
+
+    public void loadHomeFragment(int postion){
+        HomeFragment homeFragment = HomeFragment.newInstance(postion);
+        getSupportFragmentManager().beginTransaction().replace(R.id.home_view,homeFragment).commit();
+    }
+
+    /**
+     * 当侧边栏的首页item点击时，调用此方法
+     */
+    @Override
+    public void onDrawerHomeItemSelect(int postion) {
+        closeDrawer();
+        loadHomeFragment(postion);
+        toolbar.setTitle(DynamicType.whichOne(postion).name());
+    }
+
+    /**
+     * 当侧边栏的普通item点击时，调用此方法
+     *
+     * @param entity
+     */
+    @Override
+    public void onDrawerNormalItemSelect(MenuEntity entity) {
+        closeDrawer();
     }
 
 //    @SuppressWarnings("StatementWithEmptyBody")

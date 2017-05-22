@@ -20,6 +20,9 @@ public class DrawerAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public List<MenuEntity> menuEntities;
     private Context context;
+    private int mSelction = 1;
+
+    private DrawerSelectListener mDrawerSelectistener;
 
     public DrawerAdapter(Context context,List<MenuEntity> menuEntities){
         this.menuEntities = menuEntities;
@@ -27,6 +30,30 @@ public class DrawerAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public DrawerAdapter(){
+    }
+
+    public void setSelection(int position) {
+
+        int lastpos = mSelction;
+
+        mSelction = position;
+
+        notifyItemChanged(lastpos);
+
+        notifyItemChanged(mSelction);
+
+    }
+
+    public int getmSelction() {
+        return mSelction;
+    }
+
+    public DrawerSelectListener getmDrawerSelectistener() {
+        return mDrawerSelectistener;
+    }
+
+    public void setmDrawerSelectistener(DrawerSelectListener mDrawerSelectistener) {
+        this.mDrawerSelectistener = mDrawerSelectistener;
     }
 
     @Override

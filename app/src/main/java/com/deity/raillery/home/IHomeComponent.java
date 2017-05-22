@@ -2,6 +2,7 @@ package com.deity.raillery.home;
 
 import com.deity.raillery.base.BaseRxPresenter;
 import com.deity.raillery.base.BaseView;
+import com.deity.raillery.model.entity.DynamicType;
 import com.deity.raillery.model.entity.ResponseEntity;
 
 /**
@@ -11,13 +12,13 @@ import com.deity.raillery.model.entity.ResponseEntity;
 
 public interface IHomeComponent {
 
-    public interface View extends BaseView{
+    interface View extends BaseView{
         void showDynamic(ResponseEntity entity);
         void showLoadFail();
         void showLoadEnd();
     }
 
-    public abstract class Presenter<R> extends BaseRxPresenter<R,View>{
+    abstract class Presenter<R> extends BaseRxPresenter<R,View>{
         /**
          * 分页加载动态消息数据
          * @param page 当前页数

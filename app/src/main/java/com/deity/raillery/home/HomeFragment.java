@@ -1,6 +1,5 @@
 package com.deity.raillery.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,8 +13,8 @@ import android.view.ViewGroup;
 import com.deity.raillery.R;
 import com.deity.raillery.base.BaseRxFragment;
 import com.deity.raillery.base.SpaceItemDecoration;
-import com.deity.raillery.data.Params;
 import com.deity.raillery.model.entity.DynamicEntity;
+import com.deity.raillery.model.entity.DynamicType;
 import com.deity.raillery.model.entity.ResponseEntity;
 import com.deity.raillery.utils.I18NData;
 import com.othershe.baseadapter.ViewHolder;
@@ -38,10 +37,11 @@ public class HomeFragment extends BaseRxFragment<HomePresenter> implements IHome
     private HomeAdapter homeAdapter;
     /**重新加载*/
     private int currentPage=0;
+    private DynamicType type = DynamicType.TODAY;
 
-    public static HomeFragment newInstance(Bundle args) {
+    public static HomeFragment newInstance(int postion) {
         HomeFragment fragment = new HomeFragment();
-        fragment.setArguments(args);
+        fragment.setType(DynamicType.whichOne(postion));
         return fragment;
     }
 
@@ -154,5 +154,13 @@ public class HomeFragment extends BaseRxFragment<HomePresenter> implements IHome
     public void onRefresh() {
         Log.i("onRefresh","loadDynamicByPage(0)");
         mPresenter.loadDynamicByPage(0);
+    }
+
+    public DynamicType getType() {
+        return type;
+    }
+
+    public void setType(DynamicType type) {
+        this.type = type;
     }
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.deity.raillery.HomeActivity;
 import com.deity.raillery.R;
 import com.deity.raillery.model.entity.MenuEntity;
 
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
  * Created by Deity on 2017/5/18.
  */
 
-public class DrawerFragment extends Fragment {
+public class DrawerFragment extends Fragment implements DrawerSelectListener{
 
     @BindView(R.id.nav_rv_content)
     RecyclerView mRvContent;
@@ -56,10 +57,35 @@ public class DrawerFragment extends Fragment {
 
     protected void init() {
         mDrawerAdapter = new DrawerAdapter(getActivity(),menuEntityTest());
-//        mDrawerAdapter.setOnDrawerItemSelectListener(this);
+        mDrawerAdapter.setmDrawerSelectistener(this);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRvContent.setLayoutManager(mLayoutManager);
         mRvContent.setAdapter(mDrawerAdapter);
     }
 
+    /**
+     * 当侧边栏的首页item点击时，调用此方法
+     */
+    @Override
+    public void onDrawerHomeItemSelect(int postion) {
+        HomeActivity activity = (HomeActivity) getActivity();
+        if (activity != null) {
+            DrawerSelectListener listener = (DrawerSelectListener) activity;
+            listener.onDrawerHomeItemSelect(postion);
+        }
+    }
+
+    /**
+     * 当侧边栏的普通item点击时，调用此方法
+     *
+     * @param entity
+     */
+    @Override
+    public void onDrawerNormalItemSelect(MenuEntity entity) {
+        HomeActivity activity = (HomeActivity) getActivity();
+        if (activity != null) {
+            DrawerSelectListener listener = (DrawerSelectListener) activity;
+            listener.onDrawerNormalItemSelect(entity);
+        }
+    }
 }
